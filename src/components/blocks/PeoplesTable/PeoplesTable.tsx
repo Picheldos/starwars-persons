@@ -68,7 +68,7 @@ const PeoplesTable: React.FC<PeoplesTableProps> = observer((
         <Container>
             <PeoplesTableRow className={'topRow'}>
                 {parameters.map((parameter) => (
-                    <PeoplesTableRowItem key={parameter} dangerouslySetInnerHTML={{ __html: parameter }} />
+                    <PeoplesTableRowItem key={parameter}>{ parameter }</PeoplesTableRowItem>
                 ))}
             </PeoplesTableRow>
             <PeoplesTableRowWrapper ref={tableWrapperRef}>
@@ -76,7 +76,7 @@ const PeoplesTable: React.FC<PeoplesTableProps> = observer((
                         <PeoplesTableRow key={people.name}>
                             {parameters.map((parameter) => people[parameter] &&
                                 <PeoplesTableRowItemLink to={getPersonId(people)}>
-                                    {people[parameter]}
+                                    { people[parameter] }
                                 </PeoplesTableRowItemLink>
                             )}
                             <PeoplesTableRowItem>
@@ -88,7 +88,7 @@ const PeoplesTable: React.FC<PeoplesTableProps> = observer((
                         <PeoplesTableRow key={people.name} detail={true}>
                             {parameters.map((parameter) => people[parameter] &&
                                 <PeoplesTableRowItem>
-                                    {people[parameter]}
+                                    { people[parameter] }
                                 </PeoplesTableRowItem>
                             )}
                             {!isFavorite(people) &&
