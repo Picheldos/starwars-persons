@@ -72,33 +72,24 @@ const PeoplesTable: React.FC<PeoplesTableProps> = observer((
                 ))}
             </PeoplesTableRow>
             <PeoplesTableRowWrapper ref={tableWrapperRef}>
-                {peoples.map((people) => !detail ? (
-                        <PeoplesTableRow key={people.name}>
-                            {parameters.map((parameter) => people[parameter] &&
+                {peoples.map((people) =>
+                    <PeoplesTableRow key={people.name}>
+                        {parameters.map((parameter) => detail ?
+                            people[parameter] &&
+                                <PeoplesTableRowItem>
+                                    { people[parameter] }
+                                </PeoplesTableRowItem> :
+                            people[parameter] &&
                                 <PeoplesTableRowItemLink to={getPersonId(people)}>
                                     { people[parameter] }
                                 </PeoplesTableRowItemLink>
-                            )}
+                        )}
+                        {(!detail || !isFavorite(people)) &&
                             <PeoplesTableRowItem>
-                                <Button text={btnText(people)} onClick={() => onClickHandler(people)} />
+                                <Button text={btnText(people)} onClick={() => onClickHandler(people)}/>
                             </PeoplesTableRowItem>
-                        </PeoplesTableRow>
-                    ) :
-                    (
-                        <PeoplesTableRow key={people.name} detail={true}>
-                            {parameters.map((parameter) => people[parameter] &&
-                                <PeoplesTableRowItem>
-                                    { people[parameter] }
-                                </PeoplesTableRowItem>
-                            )}
-                            {!isFavorite(people) &&
-                                <PeoplesTableRowItem>
-                                    <Button text={btnText(people)} onClick={() => onClickHandler(people)}/>
-                                </PeoplesTableRowItem>
-                            }
-                        </PeoplesTableRow>
-                    )
-
+                        }
+                    </PeoplesTableRow>
                 )}
             </PeoplesTableRowWrapper>
             {isLoading && <Loading />}
