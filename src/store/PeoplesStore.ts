@@ -10,7 +10,7 @@ class PeoplesStore {
     favorites: People[] = favoritesFromStorage || [];
     nextUrl: string | null = null;
     isLoading: boolean = false;
-    character?: People = undefined;
+    character?: People;
 
     constructor() {
         makeAutoObservable(this);

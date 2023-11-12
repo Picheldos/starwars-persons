@@ -74,10 +74,11 @@ const PeoplesTable: React.FC<PeoplesTableProps> = observer((
             <PeoplesTableRowWrapper ref={tableWrapperRef}>
                 {peoples.map((people) => !detail ? (
                         <PeoplesTableRow key={people.name}>
-                            <PeoplesTableRowItemLink to={getPersonId(people)} dangerouslySetInnerHTML={{ __html: people.name }} />
-                            <PeoplesTableRowItemLink to={getPersonId(people)} dangerouslySetInnerHTML={{ __html: people.height }} />
-                            <PeoplesTableRowItemLink to={getPersonId(people)} dangerouslySetInnerHTML={{ __html: people.mass }} />
-                            <PeoplesTableRowItemLink to={getPersonId(people)} dangerouslySetInnerHTML={{ __html: people.hair_color }} />
+                            {parameters.map((parameter) => people[parameter] &&
+                                <PeoplesTableRowItemLink to={getPersonId(people)}>
+                                    {people[parameter]}
+                                </PeoplesTableRowItemLink>
+                            )}
                             <PeoplesTableRowItem>
                                 <Button text={btnText(people)} onClick={() => onClickHandler(people)} />
                             </PeoplesTableRowItem>
@@ -85,14 +86,11 @@ const PeoplesTable: React.FC<PeoplesTableProps> = observer((
                     ) :
                     (
                         <PeoplesTableRow key={people.name} detail={true}>
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.name }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.height }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.mass }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.hair_color }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.skin_color }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.eye_color }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.birth_year }} />
-                            <PeoplesTableRowItem dangerouslySetInnerHTML={{ __html: people.gender }} />
+                            {parameters.map((parameter) => people[parameter] &&
+                                <PeoplesTableRowItem>
+                                    {people[parameter]}
+                                </PeoplesTableRowItem>
+                            )}
                             {!isFavorite(people) &&
                                 <PeoplesTableRowItem>
                                     <Button text={btnText(people)} onClick={() => onClickHandler(people)}/>
