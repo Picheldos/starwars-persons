@@ -2,8 +2,8 @@ import {styled} from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
-  bottom: 60px;
-  right: 60px;
+  bottom: 50px;
+  right: 50px;
   border-radius: 50%;
   div {
     display: flex;
